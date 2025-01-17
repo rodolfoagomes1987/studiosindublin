@@ -1,0 +1,118 @@
+<ui:composition template="../templates/templatePrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:raia="http://www.raiadrogasil.com.br/facelets"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+	<ui:define name="principal">
+
+		<ui:include src="../message.xhtml" />
+
+		<p:panel header="Address Information::" style="margin-bottom:10px;">
+			<p:commandButton id="btnIncluir" value="Add new address "
+				style="margin-bottom:10px;" icon="ui-icon-plusthick"
+				rendered="#{loginMBean.userLogged.profile == 'ADMIN' }"
+				actionListener="#{addressMBean.prepararIncluir}"
+				update=":frmManutSistema" oncomplete="dialogManutSistema.show()">
+			</p:commandButton>
+
+
+
+			<h:form id="frmSistema" style="font-size:60%">
+
+				<p:dataTable id="dtSistema" var="address"
+					value="#{addressMBean.addresses}" paginator="true" rows="500"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="500">
+
+					<p:column >
+						<f:facet name="header">
+							<h:outputText value="     Address    " />
+						</f:facet>
+						<h:outputText value="#{address.description}" />
+					</p:column>
+					<p:column rendered="#{loginMBean.userLogged.profile == 'ADMIN' }">
+						<f:facet name="header">
+							<h:outputText value=" " />
+						</f:facet>
+						<p:commandButton actionListener="#{addressMBean.prepararAlterar}"
+							update=":frmManutSistema" value="Edit" icon="ui-icon-pencil"
+							oncomplete="dialogManutSistema.show()" />
+					</p:column>
+
+					<p:column rendered="#{loginMBean.userLogged.profile == 'ADMIN' }">
+						<f:facet name="header">
+							<h:outputText value=" " />
+						</f:facet>
+						<p:commandButton value="Remove" actionListener="#{addressMBean.prepararAlterar}" icon="ui-icon-circle-close"
+							oncomplete="dialogRemove.show()" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value=" " />
+						</f:facet>
+						<p:commandButton action="#{studioMBean.editAction}"
+							icon="ui-icon-circle-zoomout"
+							value="#{address.sizeActivateStudios} Studios"
+							actionListener="#{studioMBean.attrListener}">
+							<f:attribute name="actionDsLogin" value="#{address.id}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+
+		</p:panel>
+
+		<p:dialog header="Address" widgetVar="dialogManutSistema"
+			resizable="false" modal="true" showEffect="slide" width="600">
+			<h:form id="frmManutSistema">
+				<p:messages id="dlgMessages" showDetail="true" autoUpdate="true"
+					closable="true" />
+				<h:panelGrid id="pnlGrdSistema" columns="2"
+					style="margin-bottom:10px">
+
+					<h:outputLabel for="description" value="Address" />
+					<p:inputText id="description"
+						value="#{addressMBean.address.description}" size="50"
+						maxlength="500" required="true"
+						requiredMessage="The Address field is obrigatory!!!" />
+
+					<p:commandButton update=":frmSistema:dtSistema"
+						actionListener="#{addressMBean.gravar}"
+						oncomplete="dialogManutSistema.hide()" value="Save" />
+
+
+				</h:panelGrid>
+
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog header="Remove Address" widgetVar="dialogRemove" hideEffect="explode"
+			resizable="false" modal="true" showEffect="explode" width="600">
+			<h:form id="frmRemoveAddress">
+
+				<h:panelGrid  columns="1"
+					style="margin-bottom:10px">
+
+					<h:outputText value="Do you want to remove this address?"
+						style="color:red;" />
+
+					<p:commandButton update=":frmSistema:dtSistema"
+						actionListener="#{addressMBean.remove}"
+						oncomplete="dialogRemove.hide()" value="Confirm" />
+
+				</h:panelGrid>
+
+
+			</h:form>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+
+<h:head>
+	<title>..:: Studios in Dublin ::..</title>
+	<h:outputStylesheet name="estilo.css" library="css" />
+</h:head>
+
+<h:body>
+
+	<f:view>
+		<h:form id="formTop">
+
+			<div>
+				<h:graphicImage style="padding:7px; width:460px; height:75px;" url="${pageContext.request.contextPath}/images/300.png" />
+				<p:toolbar width="100%" height="20" />
+
+
+			</div>
+		</h:form>
+
+	</f:view>
+
+	<h:form id="formLogin">
+
+
+		<table align="center">
+
+			
+
+			<tr>
+				<td align="center"><p:panel header="Login"
+						style="align:center;width:350px; height:160px;text-align:center;font-size:12px">
+
+						<h:panelGrid border="0" columns="2" columnClasses="labelRight11">
+
+							<h:outputText value="User" style="align:center" />
+							<h:inputText id="User" value="#{loginMBean.dsLogin}"
+								style="font-size:12px;align:center" />
+
+							<h:outputText value="Password" style="align:center" />
+							<h:inputSecret value="#{loginMBean.dsSenha}" redisplay="true"
+								style="font-size:12px;align:center" />
+
+						</h:panelGrid>
+
+						<h:commandButton value="Login"
+							action="#{loginMBean.validateLogin}"
+							style="font-size:11px;align:center" />
+
+
+						<p:spacer height="20"></p:spacer>
+
+						<p:messages showDetail="true" autoUpdate="true" id="msg" />
+
+
+					</p:panel></td>
+
+			</tr>
+
+			<tr>
+				<td align="center" height="50" class="font8" width="90%">
+					Copyright © 2025 RAGS Academy All rights reserved.
+				</td>
+			</tr>
+
+			<tr>
+				<td align="center" height="50" class="font8" width="100%">
+					Ver. 20250117 -  17/01/2025, since July 2016</td>
+			</tr>
+			
+				<tr>
+				<td align="center" height="50" class="font8" width="100%">
+						<h:graphicImage style="padding:5px; border-radius: 50px 20px; width:300px; height:256px;" url="${pageContext.request.contextPath}/images/dublin_ireland.png" />
+					</td>
+			</tr>
+
+
+		</table>
+
+	</h:form>
+
+</h:body>
+
+
+</html>

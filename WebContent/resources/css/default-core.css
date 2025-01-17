@@ -1,0 +1,408 @@
+
+#container {
+	background-color: #FFFFFF;
+	text-align: left;
+	line-height: 130%;
+}
+
+#div-header {
+	margin: 0;
+}
+
+#div-toolbar {
+	height:20px;
+	background-image:url(background.png);
+	background-repeat: repeat-x;
+}
+
+#div-menu {
+	margin: 0;
+	float: left;
+	width: 240px;
+}
+
+#div-body {
+	margin: 0;
+	margin-left: 255px;
+	background-color: #FFFFFF;
+	width: 100%;
+}
+
+#div-footer {
+	clear:both;
+	text-align: center;
+	font: normal normal normal 10px verdana,arial,sans-serif;
+	color: #777777;
+	border-top: 1px dashed #D5D5D5;
+}
+
+fieldset {
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+}
+
+fieldset {
+    border-color: #BED6F8;
+}
+
+legend {
+	color: #123456;
+}
+
+hr {
+	border-color:#BED6F8;
+}
+
+
+
+/********************************************************************************
+ * Cabecalho e Rodape
+ ********************************************************************************/
+.logout {
+	font: normal normal bold 11px verdana,arial,sans-serif; 
+	color: #777777;
+}
+
+.pagetitle {
+	cursor:pointer;
+	margin-bottom: 0px;
+	background-color:#D3D3D3;
+	/*color:#FFFFFF;*/
+	width:200px;
+	height:20px;
+	padding:0;
+	/*text-align:center;
+	font: bold normal normal 11px arial,sans-serif;*/	
+}
+
+
+
+/********************************************************************************
+ * Classes RichFaces
+ ********************************************************************************/
+.rich-pmenu-top-group-div {
+	border-width: 0px;
+}
+
+.rich-pmenu-item {
+	border-width: 0px;
+}
+.rich-tab-inactive {
+	cursor: pointer;
+}
+.rich-tabpanel-content {
+	border-width: 1px 1px 1px 1px;
+	background-color: transparent;
+	padding-top: 30px;
+}
+.rich-calendar-input {
+	width: 90px;	
+}
+
+.extdt-row-selected {
+	background-color: orange;
+}
+
+/********************************************************************************
+ * Inputs e labels
+ ********************************************************************************/
+.lbl {
+	font: normal normal normal 11px verdana,arial,sans-serif; 
+	color: #777777;
+	}
+
+label {
+	font: normal normal normal 11px verdana,arial,sans-serif; 
+	color: #777777;
+}
+
+.lblDados {
+	font: normal normal normal 11px verdana,arial,sans-serif; 
+	color: #777777;
+	width: 150px;
+}
+/*
+labelTitulo {
+	font: normal normal normal 13px verdana,arial,sans-serif; 
+	color: #777777;
+}
+*/
+.labelTitulo {
+	font: normal normal normal 18px verdana,arial,sans-serif; 
+	color: #00788A;
+}
+
+.labelProcessado {
+	font: normal normal bold 11px verdana,arial,sans-serif;
+	color: #006600;
+}
+
+.labelProcessadoComErro {
+	font: normal normal bold 11px verdana,arial,sans-serif; 
+	color: #FF0000;
+}
+
+.headerTitulo{
+	font: normal normal normal 18px verdana,arial,sans-serif; 
+	/*color: #336699;*/
+	color: #00788A;	
+	/*background-color:#D3D3D3;*/
+	background-color:#F1E5C8;
+	text-align:left;
+}
+
+.labelSubTitulo {
+	font: normal normal bold 13px verdana,arial,sans-serif; 
+	color: #fff;
+}
+
+input {
+	margin: 0 4px 0 0;
+	font: normal normal normal 11px verdana,arial,sans-serif; 
+	color: #000000;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-width: 1px;
+	border-bottom-color: #C0C0C0;
+	border-right-color: #C0C0C0;
+}
+
+.inputMini {
+	width: 20px;
+	margin: 0 4px 0 0;
+	font: normal normal normal 11px verdana,arial,sans-serif; 
+	color: #000000;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-width: 1px;
+	border-bottom-color: #C0C0C0;
+	border-right-color: #C0C0C0;
+}
+
+.header {
+	font: normal normal bold 11px verdana,arial,sans-serif; 
+	color: #777777;
+}
+
+.welcome-text {
+	font: normal normal normal 18px verdana,arial,sans-serif;
+	color: #336699;
+}
+
+.erroGif{
+	background-image: url("error.gif");
+}
+
+.erro {
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: red;
+}
+	
+.info-message {
+	font: normal normal normal 15px verdana,arial,sans-serif;
+	color: green;
+}
+
+.status-message {
+	font: normal normal normal 15px verdana,arial,sans-serif;
+	color: #336699;
+}
+
+.ambienteProd {
+	font: normal normal normal 24px verdana,arial,sans-serif;
+	color: green;
+}
+
+.ambienteHomo {
+	font: normal normal normal 24px verdana,arial,sans-serif;
+	color: red;
+}
+
+
+/********************************************************************************
+ * Botoes
+ ********************************************************************************/
+.button {
+	width: 100px;
+	height: 21px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent url(buttons/button.gif) no-repeat center top;
+	cursor: pointer;
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: #000000;
+}
+
+.buttonMini {
+	width: 40px;
+	height: 21px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent url(buttons/buttonMini.gif) no-repeat center top;
+	cursor: pointer;
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: #000000;
+}
+
+.buttonAddMini {
+	width: 24px;
+	height: 21px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent url(buttons/buttonAddMini.gif) no-repeat center top;
+	cursor: pointer;
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: #000000;
+}
+
+.buttonOk {
+	width: 100px;
+	height: 21px;
+	margin: 0;
+	padding: 0 0 0 20px;
+	border: 0;
+	background: transparent url(buttons/buttonOk.gif) no-repeat center top;
+	cursor: pointer;
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: #000000;
+
+}
+
+.buttonOkLarge {
+	width: 170px;
+	height: 21px;
+	margin: 0;
+	padding: 0 0 0 20px;
+	border: 0;
+	background: transparent url(buttons/buttonOkLarge.GIF) no-repeat center top;
+	cursor: pointer;
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: #000000;
+}
+
+.buttonOkBig {
+	width: 150px;
+	height: 21px;
+	margin: 0;
+	padding: 0 0 0 20px;
+	border: 0;
+	background: transparent url(buttons/buttonOkBig.gif) no-repeat center top;
+	cursor: pointer;
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: #000000;
+}
+
+.buttonDelete {
+	width: 100px;
+	height: 21px;
+	margin: 0;
+	padding: 0 0 0 20px;
+	border: 0;
+	background: transparent url(buttons/buttonRemove.gif) no-repeat center top;
+	cursor: pointer;
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: #000000;
+}
+
+.buttonRefreshBig {
+	width: 150px;
+	height: 21px;
+	margin: 0;
+	padding: 0 0 0 20px;
+	border: 0;
+	background: transparent url(buttons/buttonRefreshBig.gif) no-repeat center top;
+	cursor: pointer;
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: #000000;
+}
+
+.buttonSearch {
+	width: 100px;
+	height: 21px;
+	margin: 0;
+	padding: 0 0 0 20px;
+	border: 0;
+	background: transparent url(buttons/buttonSearch.gif) no-repeat center top;
+	cursor: pointer;
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: #000000;
+}
+
+.buttonSearchBig {
+	width: 150px;
+	height: 21px;
+	margin: 0;
+	padding: 0 0 0 20px;
+	border: 0;
+	background: transparent url(buttons/buttonSearchBig.gif) no-repeat center top;
+	cursor: pointer;
+	font: normal normal normal 11px verdana,arial,sans-serif;
+	color: #000000;
+}
+
+.buttonMini:hover {
+	color: #3399CC;
+}
+
+.buttonOk:hover { 
+	color: #3399CC;
+}
+
+.buttonSearch:hover{
+	color: #3399CC;
+}
+
+.button:hover {
+	color: #3399CC;
+}
+
+.odd-row {
+    background-color: #FFFFFF;
+}
+.even-row {
+    background-color: #FFFFFF;
+}
+.active-row {
+    background-color: #FFFFFF;
+}
+
+/********************************************************************************
+ * Tabelas
+ ********************************************************************************/
+ .tableWidth{
+ 	width: 80%;
+ 	_width: 100%;
+ }
+ 
+.divAlign{
+	text-align:right;
+	width:80%;
+	_width:100%;
+ }
+ 
+ .BG_LT{
+	background: Tomato;
+ }
+ 
+ .BG_LE{
+	background: Gold;
+ }
+ 
+ .BG_GE{
+	background: PaleGreen;
+ }
+ 
+.ui-widget, .ui-widget .ui-widget { 
+	font-size: 12px !important;
+}
+ 
+ 
+.star {
+	background-image: url("images/edit-icon.png") !important;
+}

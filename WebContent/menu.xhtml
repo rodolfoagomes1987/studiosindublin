@@ -1,0 +1,80 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<h:form>
+		<p:fieldset style="margin-bottom:10px; ">
+
+			<p:messages showDetail="true" autoUpdate="true" id="msg"
+				closable="true" showSummary="false" />
+
+
+			<div>
+
+				<table border="0" style="background-color: white">
+					<tr>
+
+						<td width="150px" valign="top" align="left"><h:graphicImage
+								style="padding:7px; width:460px; height:75px;"
+								url="${pageContext.request.contextPath}/images/300.png" /></td>
+						<td width="430px"></td>
+						<td width="620px" align="right"
+							style="background-image: url('/images/barraLight2011Azul.jpg'); background-repeat: repeat-y; font-weight: bold; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 20px;">
+
+							<h:outputLabel value="User: "
+								style="font-size:20px; font-weight: bold" /> <h:outputLabel
+								style="font-size:20px;color:blue;"
+								value="#{loginMBean.userLogged.login}" />
+
+						</td>
+					</tr>
+				</table>
+
+			</div>
+
+
+
+
+			<p:menubar>
+				<p:menuitem value="| Address |" icon="ui-icon-home"
+					action="cad_address" ajax="false" />
+
+
+				<p:menuitem value="| Report By Finish Date |" icon="ui-icon-home"
+					action="reportByFinishDate" ajax="false"
+					rendered="#{loginMBean.userLogged.profile != 'LANDLORD' }" />
+
+				<p:menuitem value="| Report By Day |" icon="ui-icon-home"
+					action="reportByDay" ajax="false"
+					rendered="#{loginMBean.userLogged.profile != 'LANDLORD' }" />
+
+				<p:menuitem value="| Report By User |" icon="ui-icon-home"
+					action="reportByAgent" ajax="false"
+					rendered="#{loginMBean.userLogged.profile != 'LANDLORD' }" />
+
+				<p:menuitem value="| Report By Collector Incharge |"
+					icon="ui-icon-home" action="reportByInchargedAgent" ajax="false"
+					rendered="#{loginMBean.userLogged.profile != 'LANDLORD' }" />
+
+
+				<p:menuitem value="| Scheduling |"
+					icon="ui-icon-home" action="scheduling" ajax="false"
+					rendered="#{loginMBean.userLogged.profile != 'LANDLORD' }" />
+
+
+
+				<p:menuitem value="Exit" icon="ui-icon-close"
+					action="#{loginMBean.sair}" />
+			</p:menubar>
+		</p:fieldset>
+
+	</h:form>
+
+
+</ui:fragment>
+
+

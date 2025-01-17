@@ -1,0 +1,138 @@
+
+
+<ui:composition template="../templates/templatePrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:raia="http://www.raiadrogasil.com.br/facelets"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+	<ui:define name="principal">
+
+
+
+		<ui:include src="../message.xhtml" />
+
+
+		<p:panel header="Studio Informations::" style="margin-bottom:10px;">
+
+
+			<p:button outcome="cad_address" value="Back to Address Page"
+				icon="ui-icon-arrowreturnthick-1-w">
+
+			</p:button>
+
+			<p:commandButton id="btnAddStudio" value="Add new Studio"
+				rendered="#{loginMBean.userLogged.profile == 'ADMIN' }"
+				icon="ui-icon-plusthick" actionListener="#{studioMBean.preparAdd}"
+				update=":frmManutStudio" oncomplete="dialogStudio.show()">
+			</p:commandButton>
+
+		</p:panel>
+
+		<p:dialog header="Address" widgetVar="dialogStudio" resizable="false"
+			modal="true" showEffect="slide" width="600">
+			<h:form id="frmManutStudio">
+				<p:messages id="dlgMessages" showDetail="true" autoUpdate="true"
+					closable="true" />
+				<h:panelGrid columns="2" style="margin-bottom:10px">
+
+					<h:outputLabel for="description" value="Address" />
+					<p:inputText id="description"
+						value="#{studioMBean.studio.description}" size="50"
+						maxlength="500" required="true"
+						requiredMessage="The Description field is obrigatory!!!" />
+
+					<p:commandButton update=":frmStudio:dtStudio"
+						actionListener="#{studioMBean.save}"
+						oncomplete="dialogStudio.hide()" value="Save" />
+
+
+				</h:panelGrid>
+
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog header="Remove Studio" widgetVar="dialogRemoveStudio" hideEffect="explode"
+			resizable="false" modal="true" showEffect="explode" width="600">
+			<h:form id="frmRemoveStudio">
+
+				<h:panelGrid columns="1"
+					style="margin-bottom:10px">
+
+					<h:outputText value="Do you want to remove this studio?"
+						style="color:red;" />
+
+					<p:commandButton update=":frmStudio:dtStudio"
+						actionListener="#{studioMBean.remove}"
+						oncomplete="dialogRemoveStudio.hide()" value="Confirm" />
+
+				</h:panelGrid>
+
+
+			</h:form>
+		</p:dialog>
+		
+ 
+		<h:form id="frmStudio" style="font-size:60%">
+			<p:panel style="margin-bottom:10px;">
+				<p:dataTable id="dtStudio" var="studio"
+					value="#{studioMBean.studios}" paginator="true" rows="500"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="500">
+
+					
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Description" />
+						</f:facet>
+						<h:outputText value="#{studio.description}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Address" />
+						</f:facet>
+						<h:outputText value="#{studio.address.description}" />
+					</p:column>
+					
+					<p:column rendered="#{loginMBean.userLogged.profile == 'ADMIN' }">
+						<f:facet name="header">
+							<h:outputText value=" " />
+						</f:facet>
+						<p:commandButton value="Remove" actionListener="#{studioMBean.prepararAlterar}" icon="ui-icon-circle-close"
+							oncomplete="dialogRemoveStudio.show()" />
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value=" " />
+						</f:facet>
+
+						<p:commandButton action="#{customerMBean.editAction}"
+							icon="ui-icon-circle-zoomout"
+							value="#{studio.customersSize eq 0 ? '+ add tenant': studio.customers.get(studio.lastPositionArray).name }"
+							actionListener="#{customerMBean.attrListener}">
+
+							<f:attribute name="customerId"
+								value="#{studio.customersSize eq 0 ? 0 : studio.customers.get(studio.lastPositionArray).id}" />
+
+							<f:attribute name="studioId" value="#{studio.id}" />
+
+						</p:commandButton>
+
+					</p:column>
+				</p:dataTable>
+
+				
+
+			</p:panel>
+		</h:form>
+
+
+
+
+	</ui:define>
+</ui:composition>

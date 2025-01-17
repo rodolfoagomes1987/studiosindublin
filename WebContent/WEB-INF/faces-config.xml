@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+     	   
+<application>
+    <message-bundle>resources.mensagens</message-bundle>
+    <resource-bundle>
+		<base-name>resources.mensagens</base-name>
+		<var>msg</var>
+   </resource-bundle>
+
+</application>
+
+	<!-- Login (Nav) -->
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>start</from-outcome>
+			<to-view-id>/pages/start.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>sair</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+    <navigation-rule>
+		<navigation-case>
+			<from-outcome>cad_address</from-outcome>
+			<to-view-id>/pages/address.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>cad_studio</from-outcome>
+			<to-view-id>/pages/studio.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>reportByFinishDate</from-outcome>
+			<to-view-id>/pages/reportByFinishDate.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>scheduling</from-outcome>
+			<to-view-id>/pages/scheduling.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	
+	
+	
+	
+	
+  
+	
+	
+</faces-config>

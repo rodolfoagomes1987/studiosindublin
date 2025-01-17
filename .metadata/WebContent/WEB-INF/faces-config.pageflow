@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15106005993500" configfile="/studiosindublin/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="178" id="pf15106006901211" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" outlinks="pf15106006901212" inlinks="pf15106006901213 pf15106006901214 pf15106006901215" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/start.xhtml" x="554" y="178" id="pf15106006901216" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15106006901212" path="/pages/start.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="562" id="pf15106006901217" outlinks="pf15106006901213 pf15106006901214 pf15106006901215 pf15106006901219 pf151060069012110 pf151060069012111 pf15943839748170" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/studio.xhtml" x="338" y="946" id="pf151060069012113" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf15106006901219" path="/pages/studio.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/reportByFinishDate.xhtml" x="338" y="1330" id="pf151060069012114" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf151060069012110" path="/pages/reportByFinishDate.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/scheduling.xhtml" id="pf151060069012115" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf151060069012111" path="/pages/scheduling.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/address.xhtml" id="pf15943839748171" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf15943839748170" path="/pages/address.xhtml"/>
+  <links id="pf15106006901212" target="pf15106006901216" source="pf15106006901211" outcome="start"/>
+  <links id="pf15106006901213" target="pf15106006901211" source="pf15106006901217" outcome="logout"/>
+  <links id="pf15106006901214" target="pf15106006901211" source="pf15106006901217" outcome="sair"/>
+  <links id="pf15106006901215" target="pf15106006901211" source="pf15106006901217" outcome="login"/>
+  <links id="pf15106006901219" target="pf151060069012113" source="pf15106006901217" outcome="cad_studio"/>
+  <links id="pf151060069012110" target="pf151060069012114" source="pf15106006901217" outcome="reportByFinishDate"/>
+  <links id="pf151060069012111" target="pf151060069012115" source="pf15106006901217" outcome="scheduling"/>
+  <links id="pf15943839748170" target="pf15943839748171" source="pf15106006901217" outcome="cad_address"/>
+</pageflow:Pageflow>

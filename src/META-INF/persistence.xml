@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="StudiosDublin"
+		transaction-type="RESOURCE_LOCAL">
+
+
+		<class>model.Address</class>
+		<class>model.Customer</class>
+		<class>model.Studio</class>
+		<class>model.User</class>
+		<class>model.Scheduling</class>
+
+
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.cj.jdbc.Driver" />
+
+				<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://studiosindublin-mysql8.cx4ul0hg8yps.eu-west-1.rds.amazonaws.com/studiosindublin?useSSL=false" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password"
+				value="QxQZ3z97Mxt6rRtE" /> 
+		<!-- 
+				
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://15.235.55.109:3306/rodol3298_studiosindublin?useSSL=false" />
+			<property name="javax.persistence.jdbc.user" value="rodol3298_root" />
+			<property name="javax.persistence.jdbc.password"
+				value="y375ghk!huinckm$" />
+ -->
+			<property name="connection.autocommit" value="true" />
+
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL8Dialect" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.connection.pool_size" value="50" />
+			<property name="hibernate.event.merge.entity_copy_observer"
+				value="allow" />
+
+
+
+			<!-- Configuring Connection Pool -->
+			<property name="hibernate.c3p0.min_size" value="5" />
+			<property name="hibernate.c3p0.max_size" value="300" />
+			<property name="hibernate.c3p0.timeout" value="50" />
+			<property name="hibernate.c3p0.max_statements" value="50" />
+			<property name="hibernate.c3p0.idle_test_period"
+				value="2000" />
+
+
+
+
+
+
+		</properties>
+
+
+
+	</persistence-unit>
+</persistence>
+

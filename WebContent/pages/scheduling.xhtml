@@ -1,0 +1,99 @@
+<ui:composition template="../templates/templatePrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:raia="http://www.raiadrogasil.com.br/facelets"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+	<ui:define name="principal">
+
+		<ui:include src="../message.xhtml" />
+
+
+
+
+		<p:panel header="Sheduling::" style="margin-bottom:10px;">
+
+
+
+
+			<h:form>
+				<p:growl id="msgs_dialog" showDetail="true" life="5000" />
+
+				<h:panelGrid columnClasses="value">
+					<h3 style="margin-top: 0">Editable Schedule</h3>
+					<p:schedule id="schedule" value="#{scheduleView.eventModel}" 
+						widgetVar="myschedule" firstHour="8" draggable="false"
+						resizable="false" axisFormat="HH" slotMinutes="30"
+						columnFormat="ddd d/M" timeFormat="HH:mm" minTime="8am"
+						maxTime="19:00pm">
+						<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}"
+							update="eventDetails" oncomplete="PF('eventDialog').show();" />
+						<p:ajax event="eventSelect"
+							listener="#{scheduleView.onEventSelect}"
+							update="eventDetails,eventDialog"
+							oncomplete="PF('eventDialog').show();" />
+
+
+					</p:schedule>
+
+
+				</h:panelGrid>
+
+				<p:dialog widgetVar="eventDialog" id="eventDialog" width="500"
+					height="200" header="Event Details" showEffect="clip"
+					hideEffect="clip">
+
+
+
+					<h:panelGrid id="eventDetails" columns="2">
+						<p:outputLabel for="address" value="Address:" />
+						<p:inputText id="address"
+							value="#{scheduleView.scheduling.address}" size="50"
+							maxlength="200" />
+
+						<p:outputLabel for="service" value="Service:" />
+						<p:inputText id="service"
+							value="#{scheduleView.scheduling.serviceDescription}" size="50"
+							maxlength="200" />
+
+						<p:outputLabel for="from" value="From:" />
+						<p:calendar id="from" value="#{scheduleView.scheduling.dateStart}"
+							minHour="8" maxHour="19" pattern="dd/MM/yyyy HH:mm" />
+
+						<p:outputLabel for="to" value="To:" />
+						<p:calendar id="to" value="#{scheduleView.scheduling.dateEnd}"
+							minHour="8" maxHour="19" pattern="dd/MM/yyyy HH:mm" />
+
+						<p:outputLabel for="allDay" value="All Day:" />
+						<h:selectBooleanCheckbox id="allDay"
+							value="#{scheduleView.event.allDay}" />
+
+						<p:commandButton id="deleteButton" value="Delete" actionListener="#{scheduleView.deleteEvent}"
+							oncomplete="PF('myschedule').update();"
+							onsuccess="PF('eventDialog').hide();" update="msgs_dialog"/>
+							
+						<p:commandButton id="addButton" value="Save"
+							actionListener="#{scheduleView.addEvent}"
+							oncomplete="PF('myschedule').update();"
+							onsuccess="PF('eventDialog').hide();" update="msgs_dialog" />
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+
+
+			<style type="text/css">
+.value {
+	width: 1200px;
+}
+</style>
+
+
+
+		</p:panel>
+
+
+	</ui:define>
+</ui:composition>

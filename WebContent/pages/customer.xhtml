@@ -1,0 +1,408 @@
+<ui:composition template="../templates/templatePrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:raia="http://www.raiadrogasil.com.br/facelets"
+	xmlns:c="http://java.sun.com/jstl/core">
+	<ui:define name="principal">
+		<ui:include src="../message.xhtml" />
+		<h:form id="frmBack" style="font-size:60%">
+			<p:panel header="Tenancy Information::" style="margin-bottom:10px;">
+				<p:commandButton action="#{studioMBean.editAction}"
+					icon="ui-icon-circle-zoomout" value="Back to Studio Page"
+					actionListener="#{studioMBean.attrListener}">
+					<f:attribute name="actionDsLogin" value="#{studioMBean.addressId}" />
+				</p:commandButton>
+				<p:commandButton id="btnReplaceTenancy" value="Replace new Tenant"
+					widgetVar="btnReplaceTenancy" onclick="btnReplaceTenancy.disable()"
+					rendered="#{loginMBean.userLogged.profile != 'LANDLORD' }"
+					icon="ui-icon-plusthick"
+					actionListener="#{customerMBean.preparAdd}" update=":frmCustomer">
+				</p:commandButton>
+			</p:panel>
+		</h:form>
+		<h:form id="frmCustomer" style="font-size:60%">
+			<p:panel style="margin-bottom:20px;font-weight: bold;">
+				<h:outputText
+					value="RESIDENCIAL LEASE AGREEMENT - RENT BOOK THRESHOLD" />
+			</p:panel>
+			<p:panel style="margin-bottom:30px;" header="Tenancy Details::">
+				<h:panelGrid columns="2" style="margin-bottom:10px">
+					<h:outputLabel for="name" value="Name: *" />
+					<p:inputText id="name" value="#{customerMBean.customer.name}"
+						size="50" maxlength="100" required="true"
+						requiredMessage="The Name field is obrigatory!!!" />
+					<h:outputLabel for="PRTBNumber" value="PRTB Number" />
+					<p:inputText id="PRTBNumber"
+						value="#{customerMBean.customer.PRTBNumber}" size="20"
+						maxlength="100" />
+					<h:outputLabel for="addressTenancy" value="Address Tenancy: " />
+					<p:inputText id="addressTenancy"
+						value="#{customerMBean.customer.addressTenancy}" readonly="true"
+						size="50" maxlength="100" />
+					<h:outputLabel for="passportNumber" value="Passaport Number: *" />
+					<p:inputText id="passportNumber"
+						value="#{customerMBean.customer.passportNumber}" size="20"
+						maxlength="100" required="true"
+						requiredMessage="The Passaport Number field is obrigatory!!!" />
+					<p:outputLabel for="passportExpiryDate"
+						value="Passport Expiry Date: " />
+					<p:calendar id="passportExpiryDate" required="true" locale="ie"
+						navigator="true" pattern="dd/MM/yyyy"
+						requiredMessage="The Passaport Expiry Date field is obrigatory!!!"
+						value="#{customerMBean.customer.passportExpiryDate}"
+						showOn="button" />
+					<h:outputLabel for="gnibNumber" value="GNIB Number: " />
+					<p:inputText id="gnibNumber"
+						value="#{customerMBean.customer.gnibNumber}" size="20"
+						maxlength="50" />
+					<p:outputLabel for="gnibExpiryDate" value="GNIB Expiry Date: " />
+					<p:calendar id="gnibExpiryDate" locale="ie" navigator="true"
+						pattern="dd/MM/yyyy"
+						value="#{customerMBean.customer.gnibExpiryDate}" showOn="button" />
+					<h:outputLabel for="ppsNumber" value="PPS Number: " />
+					<p:inputText id="ppsNumber"
+						value="#{customerMBean.customer.ppsNumber}" size="20"
+						maxlength="50" />
+					<h:outputLabel for="nationality" value="Nationality: *" />
+					<p:inputText id="nationality"
+						value="#{customerMBean.customer.nationality}" size="20"
+						maxlength="20" required="true"
+						requiredMessage="The Nationality field is obrigatory!!!" />
+					<h:outputLabel for="dateOfBirth" value="Date of Birthday Date: *" />
+					<p:calendar id="dateOfBirth" locale="ie" navigator="true"
+						pattern="dd/MM/yyyy" value="#{customerMBean.customer.dateOfBirth}"
+						showOn="button" required="true"
+						requiredMessage="The Date of Birthday field is obrigatory!!!" />
+					<h:outputLabel for="placeOfBirth" value="Place of Birthday: *" />
+					<p:inputText id="placeOfBirth"
+						value="#{customerMBean.customer.placeOfBirth}" size="20"
+						maxlength="50" required="true"
+						requiredMessage="The Place of Birthday field is obrigatory!!!" />
+					<h:outputLabel for="phoneNumber" value="Phone Number: *" />
+					<p:inputText id="phoneNumber"
+						value="#{customerMBean.customer.phoneNumber}" size="20"
+						maxlength="20" required="true"
+						requiredMessage="The Phone number field is obrigatory!!!" />
+					<h:outputLabel for="dateOfCommencent" value="Date of Commencement *" />
+					<p:calendar id="dateOfCommencent"
+						value="#{customerMBean.customer.dateOfCommencent}" showOn="button"
+						required="true" locale="ie" navigator="true" pattern="dd/MM/yyyy"
+						requiredMessage="The Date of Commencent field is obrigatory!!!" />
+					<h:outputLabel for="depositPaid" value="Deposit Paid: €€€ *" />
+					<p:inputText id="depositPaid"
+						value="#{customerMBean.customer.depositPaid}" size="10"
+						maxlength="20" required="true"
+						requiredMessage="The Deposit Paid field is obrigatory!!!" />
+					<h:outputLabel for="rentInAdvance" value="Rent in advance: €€€ *" />
+					<p:inputText id="rentInAdvance"
+						value="#{customerMBean.customer.rentInAdvance}" size="10"
+						maxlength="20" required="true"
+						requiredMessage="The Rent in Advance field is obrigatory!!!" />
+					<h:outputLabel for="termOfTheTenancy"
+						value="Term of the Tenancy: *" />
+					<p:inputText id="termOfTheTenancy"
+						value="#{customerMBean.customer.termOfTheTenancy}" size="30"
+						maxlength="20" required="true"
+						requiredMessage="The Term of the Tenancy field is obrigatory!!!" />
+					<h:outputLabel for="fixedTermFrom" value="Date fixed term from: *" />
+					<p:calendar id="fixedTermFrom" locale="ie" navigator="true"
+						pattern="dd/MM/yyyy"
+						value="#{customerMBean.customer.fixedTermFrom}" showOn="button"
+						required="true"
+						requiredMessage="The Date fixed term from field is obrigatory!!!" />
+					<h:outputLabel for="fixedTermTo" value="Date fixed term to: *" />
+					<p:calendar id="fixedTermTo"
+						value="#{customerMBean.customer.fixedTermTo}" showOn="button"
+						required="true" locale="ie" navigator="true" pattern="dd/MM/yyyy"
+						requiredMessage="The Date fixed term To field is obrigatory!!!" />
+					<h:outputLabel for="rentDay" value="Rent day: *" />
+					<p:row>
+					<p:inputText id="rentDay" value="#{customerMBean.customer.rentDay}"
+						size="5" maxlength="2" required="true"
+						requiredMessage="The Rent Day field is obrigatory!!!" />
+						<h:outputLabel style="font-weight:bold; color:red" value="  *** Fine and late payment (2% + 1 %) ***" />
+						</p:row>
+
+
+
+					<!-- <h:outputLabel for="arrears" value="Credit: " />
+					<p:inputText id="arrears" value="#{customerMBean.customer.arrears}"
+						size="10" maxlength="10" />
+
+
+
+
+					
+						<h:outputLabel for="totalcredit" value="Total Credit: " />
+					<p:inputText id="totalcredit" value="#{customerMBean.customer.totalcredit}"
+						size="10" maxlength="20" />
+						
+						<h:outputLabel for="totalcards" value="Total Cards: " />
+					<p:inputText id="totalcards" value="#{customerMBean.customer.totalcards}"
+						size="10" maxlength="20" /> -->
+					
+					
+					<h:outputLabel for="agent" value=""  type="hidden" />
+					<p:inputText id="agent" value="#{customerMBean.customer.agent}"
+						size="20" maxlength="50" required="true" readonly="true"
+						requiredMessage="The Rent Day field is obrigatory!!!"  type="hidden"/>
+						
+						
+					<h:outputLabel for="dateAgentSave" value="Date save: " />
+					<p:inputText id="dateAgentSave"
+						value="#{customerMBean.customer.dateAgentSaveFormat}"
+						readonly="true" required="true"
+						requiredMessage="The Date Agent save To field is obrigatory!!!" />
+					<h:outputLabel for="email" value="Email: " />
+					<p:inputText id="email" value="#{customerMBean.customer.email}"
+						size="40" maxlength="50" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel style="margin-bottom:30px;"
+				header="Extra Information::">
+				<h:panelGrid columns="2" style="margin-bottom:10px">
+					<h:outputLabel for="extraInformation" value="Additional Information: " />
+					
+					 <p:inputTextarea rows="14" cols="66" id="extraInformation" maxlength="4999" value="#{customerMBean.customer.extraInformation}" />
+					
+				</h:panelGrid>
+			</p:panel>
+
+
+
+			
+			<p:panel
+				footer="Note: When the tenant moves out everything will be checked by landlord, if there is something different it will be deducted from the deposit, it includes furniture, any damage or cleanliness. For cleaning of property it will be charged €100 + €10 per rubbish bag."
+				style="margin-bottom:40px;" header="Inventory and conditions ( furniture, electrical, hydraulic, structural) is attached::">
+				<p:panel style="margin-bottom:5px;font-weight: bold;">
+					<h:outputText
+						value="An inventory of cleanliness, property condition, and the furnishings and appliances provided by the landlord should be created, although there is no legal obligation to do so. Threshold recommends documenting the condition of these items at the start of the tenancy to help prevent future disputes. Tenants have 30 days from the start of the tenancy to inspect every item in the property and report any issues to the landlord. This ensures that any problems are addressed before the key is returned and helps prevent deductions from the deposit.  " />
+				</p:panel>
+			</p:panel>
+			<p:panel style="margin-bottom:20px;"
+				
+				header="Service Payments to Landlord in Rent::">
+				<h:panelGrid columns="2" style="margin-bottom:10px">
+					<p:panelGrid style="margin-top:20px; colspan:5">
+						<f:facet name="header">
+							<p:row>
+								<p:column>Service</p:column>
+								<p:column>Included</p:column>
+							</p:row>
+						</f:facet>
+						<p:row>
+							<p:column style="font-weight: bold;">CENTRAL: De 2 a 6 feira / das 09 as 13h - das 14h as 18h - Whatsapp 089 424 7121</p:column>
+							<p:column>
+								<p:inputText id="serPayCentralMonFriWhatsapp"
+									value="#{customerMBean.customer.serPayCentralMonFriWhatsapp}"
+									size="5" maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">Set of Keys (per person), boiler water service, radiator heating service</p:column>
+							<p:column>
+								<p:inputText id="serPaySetOfKeys"
+									value="#{customerMBean.customer.serPaySetOfKeys}" size="5"
+									maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">Electricity card or electricity card delivery fee ( €10 )</p:column>
+							<p:column>
+								<p:inputText id="serPayEletricity"
+									value="#{customerMBean.customer.serPayEletricity}" size="5"
+									maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">New leasing or renewal fee (€50.)</p:column>
+							<p:column>
+								<p:inputText id="serPayRentBook"
+									value="#{customerMBean.customer.serPayRentBook}" size="5"
+									maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">Internet , phone, TV services,  TV license and Irish Water Service</p:column>
+							<p:column>
+								<p:inputText id="serPayInternetPhoneTV"
+									value="#{customerMBean.customer.serPayInternetPhoneTV}"
+									size="5" maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">Painter or plumber service</p:column>
+							<p:column>
+								<p:inputText id="serPayPainterPlumber"
+									value="#{customerMBean.customer.serPayPainterPlumber}" size="5"
+									maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">General Waste /Recycling Bags or Rubbish collection</p:column>
+							<p:column>
+								<p:inputText id="serPayGeneralWasteRecycling"
+									value="#{customerMBean.customer.serPayGeneralWasteRecycling}"
+									size="5" maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">Transfer service by car,  small domestic repairs, cleanliness of the property</p:column>
+							<p:column>
+								<p:inputText id="serPayTransfServiceByCar"
+									value="#{customerMBean.customer.serPayTransfServiceByCar}"
+									size="5" maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">Supply of electrical appliance, kettle, toaster, microwave, sandwich maker, blender</p:column>
+							<p:column>
+								<p:inputText id="serPaySupplyEletricKettle"
+									value="#{customerMBean.customer.serPaySupplyEletricKettle}"
+									size="5" maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">Spare part for fridge, cooker, washing and dryer machine, boiler water spare part</p:column>
+							<p:column>
+								<p:inputText id="serPaySpareFridgeCook"
+									value="#{customerMBean.customer.serPaySpareFridgeCook}"
+									size="5" maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">Spare door lock parts, door lock key, door lock handle</p:column>
+							<p:column>
+								<p:inputText id="serPaySpareDoorLock"
+									value="#{customerMBean.customer.serPaySpareDoorLock}" size="5"
+									maxlength="1" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="font-weight: bold;">Toilet seat, light bulb, bed linen, cutlery, dinner plates, glasses, kitchen utensils</p:column>
+							<p:column>
+								<p:inputText id="serPayToiletSeat"
+									value="#{customerMBean.customer.serPayToiletSeat}" size="5"
+									maxlength="1" />
+							</p:column>
+						</p:row>
+					</p:panelGrid>
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel style="margin-bottom:30px;">
+				<h:panelGrid columns="2" style="margin-bottom:10px">
+					<p:commandButton update=":frmCustomer" widgetVar="saveButton"
+						onclick="saveButton.disable()" ajax="true"
+						rendered="#{loginMBean.userLogged.profile != 'LANDLORD' }"
+						actionListener="#{customerMBean.save}" value="Save" />
+					<!-- <p:commandButton value="Download" ajax="false">
+						<p:fileDownload value="#{customerMBean.file}" />
+					</p:commandButton> -->
+				</h:panelGrid>
+			</p:panel>
+			<p:panel style="margin-bottom:30px;"
+				
+				header="Rules::">
+				<h:panelGrid columns="1" style="margin-bottom:10px">
+					<h:outputText
+						value="• Keep the door of the building House, Studio or Flat closed at all times." />
+					<h:outputText
+						value="• Do not make excessive noise between 08pm – 08am. Please respect the residents and the neighborhood." />
+					<h:outputText
+						value="• Due to noise complaints in building shared do not use any machine between 08pm – 08am. " />
+					<h:outputText
+						value="• Not allowed: smoking, pets, barbecue in the garden, parties, events, bike on hallway of the property." />
+					<h:outputText
+						value="• Do not throw toilet paper in toilet. Please use a basket for this purpose. " />
+					<h:outputText
+						value="• Checkout time finishes at 11AM (after that time one night more will be deducted from the deposit)." />
+					<h:outputText
+						value="• If there is an emergency, maintenance, any inspection, landlord can enter after a short notice or without notice. " />
+					<h:outputText
+						value="• Supplying electricity from the apartment may be requested by cleaning staff to clean the common area. " />
+					<h:outputText
+						value="• The tenants must inform the CENTRAL when receive guests to stay in (ID photo, date of arrival and departure).  " />
+					<h:outputText
+						value="• Do not put rubbish bag or bin outside on a wrong day, it may be fined by Dublin City Council or Landlord. " />
+				</h:panelGrid>
+			</p:panel>
+			<p:panel style="margin-bottom:30px;"
+				header="TO WHOM IT MAY CONCERN::">
+				<h:panelGrid columns="1" style="margin-bottom:10px">
+					<h:outputText value="&#160;&#160;&#160;" />
+					<h:outputText value="&#160;&#160;&#160;" />
+					<h:outputText
+						value="I, _______________________________________________________________, confirm that I have rented a property from landlord" />
+					<h:outputText value="&#160;&#160;&#160;" />
+					<h:outputText
+						value="Thomas Sexton. I agree with the conditions that;" />
+					<h:outputText
+						value="• I will receive my deposit back only when the term finishes," />
+					<h:outputText
+						value="• I will receive my deposit back only if I provide the landlord with a notice of termination letter before moving out. The notice period required depends on the length of the tenancy," />
+					<h:outputText
+						value="• If I do not return the property clean and in good condition, my deposit may be deducted for it," />
+					<h:outputText
+						value="• I cannot sub-let or change the use of the property, I may be prosecuted and lose my deposit." />
+					<h:outputText
+						value="• If I cause damage to the property, disrespect the rules, conditions or receive two notices about problem caused by me or my friends, my" />
+					<h:outputText
+						value="lease agreement will be interrupted and I do not receive my deposit back. " />
+						
+					<h:outputText
+						value="• €200 will be deducted from the deposit to cover painting and cleaning services." />
+						
+					<h:outputText
+						value="• Be aware that every month for safety reasons, may have inspection by the landlord to check the conditions of the property ( studio or flat)." />
+						
+					<h:outputText
+						value="• There will be no exchange of any item of inventory at the time of rental." />
+						
+					<h:outputText
+						value="• The electricity cards must be bought only at the landlord's office (Central)." />	
+						
+					<h:outputText
+						value="I confirm and agree with the Conditions of the Rental, Tenancy Details, Inventory and Check-in List, Service Payments to Landlord in Rent and Rules mentioned on pages 1 and 2 in this paper. " />
+					<h:outputText value="&#160;&#160;&#160;" />
+					<h:outputText value="&#160;&#160;&#160;" />
+					<h:outputText value="&#160;&#160;&#160;" />
+					<h:panelGrid columns="4" style="margin-bottom:10px; ">
+						<p:panelGrid style="margin-top:20px; colspan:5; ">
+							<p:row>
+								<p:column style="font-weight: bold;">_______________________</p:column>
+								<p:column style="font-weight: bold;">_______________________</p:column>
+								<p:column style="font-weight: bold;">_______________________</p:column>
+								<p:column style="font-weight: bold;">_______________________</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="font-weight: bold;">Landlord</p:column>
+								<p:column style="font-weight: bold;">Witness</p:column>
+								<p:column style="font-weight: bold;">Witness</p:column>
+								<p:column style="font-weight: bold;">Tenant</p:column>
+							</p:row>
+						</p:panelGrid>
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:panel>
+			<p:panel style="margin-bottom:30px;"
+				header="CHECK-OUT LIST AND DEPOSIT BACK::">
+				<h:panelGrid columns="1" style="margin-bottom:10px">
+					<h:outputText value="&#160;&#160;&#160;" />
+					<h:outputText value="&#160;&#160;&#160;" />
+					<h:outputText
+						value="Hereby I, ________________________________________ confirm check-out done by landlord __________________ on___/____/______ " />
+					<h:outputText value="&#160;&#160;&#160;" />
+
+					<h:outputText
+						value="According to my lease agreement and condition that I left the property, I agree with the amount of € ________ that I have received for my deposit back." />
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,129 @@
+<ui:composition template="../templates/templatePrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:raia="http://www.raiadrogasil.com.br/facelets"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+	<ui:define name="principal">
+
+		<ui:include src="../message.xhtml" />
+		
+		<p:panel header="Total ::" style="margin-bottom:10px;">
+
+			<h:outputText
+				value="     Total :   #{reportByAgentMBean.customers.getRowCount()} " />
+		</p:panel>
+
+		<p:panel header="Report Tenant by Agent::" style="margin-bottom:10px;">
+
+
+			<h:form id="frmAgent" style="font-size:60%">
+
+				<h:panelGrid id="pnlGridReportByAgent" columns="2"
+					style="margin-bottom:10px">
+					<h:commandLink>
+						<p:button value="Download">
+						</p:button>
+						<p:dataExporter type="xls" target="dtFinishAgent"
+							fileName="finishByAgent" pageOnly="true" />
+					</h:commandLink>
+				</h:panelGrid>
+
+
+				<p:dataTable id="dtFinishAgent" var="customer"
+					value="#{reportByAgentMBean.customers}" paginator="true" rows="500"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="500">
+
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="     Agent    " />
+						</f:facet>
+						<h:outputText value="#{customer.agent}" />
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="     Date update    " />
+						</f:facet>
+						<h:outputText value="#{customer.dateAgentSaveFormat}" />
+					</p:column>
+
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="     Day    " />
+						</f:facet>
+						<h:outputText value="#{customer.rentDay}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="     Address    " />
+						</f:facet>
+						<h:outputText value="#{customer.studio.address.description}" />
+					</p:column>
+
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="     Studio    " />
+						</f:facet>
+						<h:outputText value="#{customer.studio.description}" />
+					</p:column>
+
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="     Rent Advance    " />
+						</f:facet>
+						<h:outputText value="#{customer.rentInAdvance}" />
+					</p:column>
+
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="     Tenant    " />
+						</f:facet>
+						<h:outputText value="#{customer.name}" />
+					</p:column>
+
+
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="     From    " />
+						</f:facet>
+						<h:outputText value="#{customer.fixedTermFromFormat}" />
+					</p:column>
+
+
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="     To    " />
+						</f:facet>
+						<h:outputText value="#{customer.fixedTermToFormat}" />
+					</p:column>
+
+
+
+
+
+
+				</p:dataTable>
+
+
+
+
+			</h:form>
+
+		</p:panel>
+
+
+	</ui:define>
+</ui:composition>

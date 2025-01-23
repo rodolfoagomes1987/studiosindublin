@@ -86,7 +86,8 @@
 						value="#{customerMBean.customer.phoneNumber}" size="20"
 						maxlength="20" required="true"
 						requiredMessage="The Phone number field is obrigatory!!!" />
-					<h:outputLabel for="dateOfCommencent" value="Date of Commencement *" />
+					<h:outputLabel for="dateOfCommencent"
+						value="Date of Commencement *" />
 					<p:calendar id="dateOfCommencent"
 						value="#{customerMBean.customer.dateOfCommencent}" showOn="button"
 						required="true" locale="ie" navigator="true" pattern="dd/MM/yyyy"
@@ -120,38 +121,43 @@
 						requiredMessage="The Date fixed term To field is obrigatory!!!" />
 					<h:outputLabel for="rentDay" value="Rent day: *" />
 					<p:row>
-					<p:inputText id="rentDay" value="#{customerMBean.customer.rentDay}"
-						size="5" maxlength="2" required="true"
-						requiredMessage="The Rent Day field is obrigatory!!!" />
-						<h:outputLabel style="font-weight:bold; color:red" value="  *** Fine and late payment (2% + 1 %) ***" />
-						</p:row>
+						<p:inputText id="rentDay"
+							value="#{customerMBean.customer.rentDay}" size="5" maxlength="2"
+							required="true"
+							requiredMessage="The Rent Day field is obrigatory!!!" />
+						<h:outputLabel style="font-weight:bold; color:red"
+							value="  *** Fine and late payment (2% + 1 %) ***" />
+					</p:row>
 
 
 
-					 <h:outputLabel for="arrears" value="" type="hidden" />
+					<h:outputLabel for="arrears" value="" type="hidden" />
 					<p:inputText id="arrears" value="#{customerMBean.customer.arrears}"
 						size="10" maxlength="10" type="hidden" />
 
 
 
 
-					
-						<h:outputLabel for="totalcredit" value="" type="hidden" />
-					<p:inputText id="totalcredit" value="#{customerMBean.customer.totalcredit}"
-						size="10" maxlength="20" type="hidden" />
-						
-						<h:outputLabel for="totalcards" value="" type="hidden"  />
-					<p:inputText id="totalcards" value="#{customerMBean.customer.totalcards}"
-						size="10" maxlength="20" type="hidden" /> 
-						
-					
-					
-					<h:outputLabel for="agent" value=""  type="hidden" />
+
+					<h:outputLabel for="totalcredit" value="" type="hidden" />
+					<p:inputText id="totalcredit"
+						value="#{customerMBean.customer.totalcredit}" size="10"
+						maxlength="20" type="hidden" />
+
+					<h:outputLabel for="totalcards" value="" type="hidden" />
+					<p:inputText id="totalcards"
+						value="#{customerMBean.customer.totalcards}" size="10"
+						maxlength="20" type="hidden" />
+
+
+
+					<h:outputLabel for="agent" value="" type="hidden" />
 					<p:inputText id="agent" value="#{customerMBean.customer.agent}"
 						size="20" maxlength="50" required="true" readonly="true"
-						requiredMessage="The Rent Day field is obrigatory!!!"  type="hidden"/>
-						
-						
+						requiredMessage="The Rent Day field is obrigatory!!!"
+						type="hidden" />
+
+
 					<h:outputLabel for="dateAgentSave" value="Date save: " />
 					<p:inputText id="dateAgentSave"
 						value="#{customerMBean.customer.dateAgentSaveFormat}"
@@ -163,29 +169,31 @@
 				</h:panelGrid>
 			</p:panel>
 
-			<p:panel style="margin-bottom:30px;"
-				header="Extra Information::">
+			<p:panel style="margin-bottom:30px;" header="Extra Information::">
 				<h:panelGrid columns="2" style="margin-bottom:10px">
-					<h:outputLabel for="extraInformation" value="Additional Information: " />
-					
-					 <p:inputTextarea rows="14" cols="66" id="extraInformation" maxlength="4999" value="#{customerMBean.customer.extraInformation}" />
-					
+					<h:outputLabel for="extraInformation"
+						value="Additional Information: " />
+
+					<p:inputTextarea rows="14" cols="66" id="extraInformation"
+						maxlength="4999"
+						value="#{customerMBean.customer.extraInformation}" />
+
 				</h:panelGrid>
 			</p:panel>
 
 
 
-			
+
 			<p:panel
 				footer="Note: When the tenant moves out everything will be checked by landlord, if there is something different it will be deducted from the deposit, it includes furniture, any damage or cleanliness. For cleaning of property it will be charged €100 + €10 per rubbish bag."
-				style="margin-bottom:40px;" header="Inventory and conditions ( furniture, electrical, hydraulic, structural) is attached::">
+				style="margin-bottom:40px;"
+				header="Inventory and conditions ( furniture, electrical, hydraulic, structural) is attached::">
 				<p:panel style="margin-bottom:5px;font-weight: bold;">
 					<h:outputText
 						value="An inventory of cleanliness, property condition, and the furnishings and appliances provided by the landlord should be created, although there is no legal obligation to do so. Threshold recommends documenting the condition of these items at the start of the tenancy to help prevent future disputes. Tenants have 30 days from the start of the tenancy to inspect every item in the property and report any issues to the landlord. This ensures that any problems are addressed before the key is returned and helps prevent deductions from the deposit.  " />
 				</p:panel>
 			</p:panel>
 			<p:panel style="margin-bottom:20px;"
-				
 				header="Service Payments to Landlord in Rent::">
 				<h:panelGrid columns="2" style="margin-bottom:10px">
 					<p:panelGrid style="margin-top:20px; colspan:5">
@@ -306,9 +314,7 @@
 					</p:commandButton> -->
 				</h:panelGrid>
 			</p:panel>
-			<p:panel style="margin-bottom:30px;"
-				
-				header="Rules::">
+			<p:panel style="margin-bottom:30px;" header="Rules::">
 				<h:panelGrid columns="1" style="margin-bottom:10px">
 					<h:outputText
 						value="• Keep the door of the building House, Studio or Flat closed at all times." />
@@ -340,8 +346,13 @@
 					<h:outputText
 						value="I, _______________________________________________________________, confirm that I have rented a property from landlord" />
 					<h:outputText value="&#160;&#160;&#160;" />
-					<h:outputText
-						value="Thomas Sexton. I agree with the conditions that;" />
+					<h:outputText value=" " />
+					<h:outputText value=" " />
+					<h:panelGroup>
+				
+				    <p:inputText id="tempLandlordName" value="#{customerMBean.customer.tempLandlordName}"/>
+				    <h:outputText value=". I agree with the conditions that;" />
+				</h:panelGroup>
 					<h:outputText
 						value="• I will receive my deposit back only when the term finishes," />
 					<h:outputText
@@ -354,19 +365,19 @@
 						value="• If I cause damage to the property, disrespect the rules, conditions or receive two notices about problem caused by me or my friends, my" />
 					<h:outputText
 						value="lease agreement will be interrupted and I do not receive my deposit back. " />
-						
+
 					<h:outputText
 						value="• €200 will be deducted from the deposit to cover painting and cleaning services." />
-						
+
 					<h:outputText
 						value="• Be aware that every month for safety reasons, may have inspection by the landlord to check the conditions of the property ( studio or flat)." />
-						
+
 					<h:outputText
 						value="• There will be no exchange of any item of inventory at the time of rental." />
-						
+
 					<h:outputText
-						value="• The electricity cards must be bought only at the landlord's office (Central)." />	
-						
+						value="• The electricity cards must be bought only at the landlord's office (Central)." />
+
 					<h:outputText
 						value="I confirm and agree with the Conditions of the Rental, Tenancy Details, Inventory and Check-in List, Service Payments to Landlord in Rent and Rules mentioned on pages 1 and 2 in this paper. " />
 					<h:outputText value="&#160;&#160;&#160;" />

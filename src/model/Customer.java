@@ -315,6 +315,17 @@ public class Customer implements Serializable {
 	@Column(name = "totalcards", length = 20)
 	private String totalcards;
 	
+	@Transient
+	private String tempLandlordName;
+
+	public String getTempLandlordName() {
+	    return tempLandlordName;
+	}
+
+	public void setTempLandlordName(String tempLandlordName) {
+	    this.tempLandlordName = tempLandlordName;
+	}
+	
 	
 
 	@Override

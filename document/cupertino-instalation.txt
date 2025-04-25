@@ -1,0 +1,5 @@
+rename the cupertino-1.0.10.jar.disabled to cupertino-1.0.10.jar
+
+https://web.archive.org/web/20161231205026/http://repository.primefaces.org/org/primefaces/themes/
+
+mvn install:install-file -Dfile=cupertino-1.0.10.jar -DgroupId=org.primefaces.themes -DartifactId=cupertino -Dversion=1.0.10 -Dpackaging=jar

@@ -1,0 +1,244 @@
+# MySQL 9.x Upgrade Guide - Java Maven Project
+
+## Current Project Status
+- **MySQL Connector/J**: 9.4.0 ✅ (Already compatible with MySQL 9.x)
+- **Hibernate**: 5.6.15.Final
+- **Current MySQL Version**: MySQL 8
+
+## Required Changes
+
+### 1. Hibernate Dialect Configuration
+
+**Current Configuration:**
+```xml
+<property name="hibernate.dialect" 
+    value="org.hibernate.dialect.MySQL8Dialect" />
+```
+
+**Options for MySQL 9.x:**
+
+#### Option A (Recommended - Easiest)
+Keep using `MySQL8Dialect` - works fine with MySQL 9.x for most use cases.
+```xml
+<property name="hibernate.dialect" 
+    value="org.hibernate.dialect.MySQL8Dialect" />
+```
+
+#### Option B (Future-proof)
+Upgrade Hibernate to 6.2+ to use MySQL9Dialect:
+```xml
+<!-- In pom.xml -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>6.4.0.Final</version>
+</dependency>
+
+<!-- In persistence.xml -->
+<property name="hibernate.dialect" 
+    value="org.hibernate.dialect.MySQL9Dialect" />
+```
+
+---
+
+### 2. C3P0 Connection Pool Update ⚠️ CRITICAL
+
+**Current Version:** 0.9.1.2 (From 2007 - Has security vulnerabilities)
+
+**Update in pom.xml:**
+```xml
+<!-- OLD -->
+<dependency>
+    <groupId>c3p0</groupId>
+    <artifactId>c3p0</artifactId>
+    <version>0.9.1.2</version>
+</dependency>
+
+<!-- NEW -->
+<dependency>
+    <groupId>com.mchange</groupId>
+    <artifactId>c3p0</artifactId>
+    <version>0.10.1</version>
+</dependency>
+```
+
+---
+
+### 3. JDBC URL Configuration Review
+
+**Current URL:**
+```
+jdbc:mysql://studiosindublin-mysql8.cx4ul0hg8yps.eu-west-1.rds.amazonaws.com/studiosindublin?useSSL=false
+```
+
+**Recommended for Production (MySQL 9.x):**
+```
+jdbc:mysql://studiosindublin-mysql8.cx4ul0hg8yps.eu-west-1.rds.amazonaws.com/studiosindublin?useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+```
+
+**URL Parameters Explained:**
+- `useSSL=true` - Enable SSL for secure connections
+- `allowPublicKeyRetrieval=true` - Required for caching_sha2_password authentication
+- `serverTimezone=UTC` - Explicit timezone to avoid ambiguity
+
+---
+
+## Other Outdated Dependencies (Not MySQL-related but Important)
+
+### Security & Maintenance Concerns
+
+1. **JSF (JavaServer Faces)**
+   - Current: 2.2.20 (2020)
+   - Status: Consider migration to Jakarta Faces or modern framework
+
+2. **PrimeFaces**
+   - Current: 4.0 (2013)
+   - Latest: 14.x
+   - Impact: Missing 10+ years of features and security fixes
+
+3. **Apache POI**
+   - Current: 3.15 (2016)
+   - Latest: 5.3.x
+   - Impact: Security vulnerabilities
+
+---
+
+## MySQL 9.x Upgrade Testing Checklist
+
+### 1. Authentication Changes
+- [ ] MySQL 9.x uses `caching_sha2_password` by default
+- [ ] Test connection with existing credentials
+- [ ] Verify `allowPublicKeyRetrieval=true` parameter works
+- [ ] Consider creating dedicated MySQL user for application
+
+### 2. Database Schema Validation
+- [ ] Check for new reserved keywords in MySQL 9
+- [ ] Verify no conflicts with table names
+- [ ] Verify no conflicts with column names
+- [ ] Test all existing queries
+
+### 3. Data Type Compatibility
+- [ ] Test all date/time operations
+- [ ] Verify DATETIME, TIMESTAMP handling
+- [ ] Check timezone conversions
+- [ ] Test NULL handling in date fields
+
+### 4. Character Set & Collation
+- [ ] Verify `utf8mb4` is properly configured
+- [ ] Test special characters (emojis, accents)
+- [ ] Check text field storage and retrieval
+
+### 5. Connection Pooling
+- [ ] Monitor C3P0 behavior after upgrade
+- [ ] Check connection acquisition times
+- [ ] Verify connection recycling works
+- [ ] Monitor for connection leaks
+- [ ] Load test with current pool settings:
+  - min_size: 5
+  - max_size: 300
+  - timeout: 50
+  - idle_test_period: 2000
+
+### 6. Performance Testing
+- [ ] Compare query execution times
+- [ ] Test with production-like data volume
+- [ ] Monitor slow query log
+- [ ] Check index usage (EXPLAIN queries)
+
+### 7. Application-Specific Tests
+- [ ] Test all CRUD operations for:
+  - Address entity
+  - Customer entity
+  - Studio entity
+  - User entity
+  - Scheduling entity
+- [ ] Test complex queries and joins
+- [ ] Verify transaction handling
+- [ ] Test concurrent operations
+
+---
+
+## Upgrade Procedure (Step-by-Step)
+
+### Phase 1: Preparation
+1. **Backup everything**
+   - Export current MySQL 8 database
+   - Save current application configuration
+   - Document current pom.xml and persistence.xml
+
+2. **Setup staging environment**
+   - Clone production environment
+   - Install MySQL 9.x on staging
+   - Import database backup
+
+### Phase 2: Code Changes
+1. Update C3P0 in pom.xml (mandatory)
+2. Review JDBC URL parameters in persistence.xml
+3. Keep MySQL8Dialect (or upgrade Hibernate if needed)
+4. Run `mvn clean install` to verify build
+
+### Phase 3: Testing
+1. Deploy to staging environment
+2. Run full test suite
+3. Perform manual testing of critical features
+4. Load testing with realistic traffic
+5. Monitor logs for warnings/errors
+
+### Phase 4: Production Migration
+1. Schedule maintenance window
+2. Backup production database
+3. Upgrade MySQL server to 9.x
+4. Deploy updated application
+5. Monitor closely for first 24-48 hours
+
+---
+
+## Rollback Plan
+
+### If Issues Occur:
+1. Keep MySQL 8 backup accessible
+2. Keep previous application WAR file
+3. Document rollback steps:
+   - Restore MySQL 8 database from backup
+   - Deploy previous application version
+   - Update DNS/connection strings if needed
+
+### Expected Downtime:
+- Estimated: 15-30 minutes for upgrade
+- Rollback: 10-15 minutes if needed
+
+---
+
+## Additional Resources
+
+### MySQL 9.x Documentation
+- [MySQL 9.x Release Notes](https://dev.mysql.com/doc/relnotes/mysql/9.0/en/)
+- [MySQL Connector/J Documentation](https://dev.mysql.com/doc/connector-j/en/)
+
+### Hibernate Documentation
+- [Hibernate 5.6 Dialects](https://docs.jboss.org/hibernate/orm/5.6/userguide/html_single/Hibernate_User_Guide.html)
+- [Hibernate 6.x Migration Guide](https://github.com/hibernate/hibernate-orm/blob/main/migration-guide.adoc)
+
+### C3P0 Documentation
+- [C3P0 Configuration](https://www.mchange.com/projects/c3p0/#configuration)
+
+---
+
+## Summary - Minimal Required Changes
+
+| Component | Action | Priority | Complexity |
+|-----------|--------|----------|------------|
+| MySQL Connector/J | ✅ Already at 9.4.0 | - | None |
+| Hibernate Dialect | ✅ Keep MySQL8Dialect | Low | None |
+| C3P0 | ⚠️ UPDATE to 0.10.1 | **HIGH** | Low |
+| JDBC URL | 🔍 Review SSL settings | Medium | Low |
+| Testing | 🧪 Full test suite | **HIGH** | Medium |
+
+---
+
+## Notes
+- Current setup date: October 3, 2025
+- Project: studiosindublin
+- Version: 20250117
+- Java Version: 17
+- Deployment: AWS RDS (eu-west-1)

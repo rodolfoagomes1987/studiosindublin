@@ -96,14 +96,13 @@
 		</dependency>
 
 
-		<!-- MySQL driver connector library -->
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	
 		<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
-<dependency>
-    <groupId>com.mysql</groupId>
-    <artifactId>mysql-connector-j</artifactId>
-    <version>9.4.0</version>
-</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>8.4.0</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
 		<dependency>
